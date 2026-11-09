@@ -1,0 +1,50 @@
+[gd_scene format=3]
+
+[sub_resource type="Environment" id="Environment_dark"]
+background_mode = 1
+background_color = Color(0.01, 0.01, 0.015, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.25, 0.27, 0.35, 1)
+ambient_light_energy = 0.15
+tonemap_mode = 4
+fog_enabled = true
+fog_light_color = Color(0.03, 0.03, 0.04, 1)
+fog_density = 0.04
+
+[sub_resource type="StandardMaterial3D" id="Material_floor"]
+albedo_color = Color(0.16, 0.15, 0.14, 1)
+roughness = 0.9
+
+[sub_resource type="PlaneMesh" id="Mesh_floor"]
+material = SubResource("Material_floor")
+size = Vector2(20, 20)
+
+[sub_resource type="StandardMaterial3D" id="Material_box"]
+albedo_color = Color(0.35, 0.33, 0.3, 1)
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="Mesh_box"]
+material = SubResource("Material_box")
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dark")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_floor")
+
+[node name="PlaceholderBox" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("Mesh_box")
+
+[node name="Lamp" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2.6, 0.5)
+light_color = Color(1, 0.82, 0.62, 1)
+light_energy = 3.0
+shadow_enabled = true
+omni_range = 9.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.98007, 0.19867, 0, -0.19867, 0.98007, 0, 1.7, 4.5)
+current = true
